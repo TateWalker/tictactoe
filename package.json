@@ -1,0 +1,69 @@
+{
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "0.1.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
+    "aws-jwt-verify": "^3.2.0",
+    "axios": "^0.23.0",
+    "babel-plugin-styled-components": "^1.13.2",
+    "bootstrap": "^5.1.1",
+    "dotenv": "^16.0.3",
+    "fs": "0.0.1-security",
+    "gatsby": "^4.1.0",
+    "gatsby-plugin-manifest": "^4.1.0",
+    "gatsby-plugin-offline": "^5.1.0",
+    "gatsby-plugin-react-helmet": "^5.1.0",
+    "gatsby-plugin-styled-components": "^5.1.0",
+    "gatsby-source-filesystem": "^4.1.0",
+    "os-browserify": "^0.3.0",
+    "papaparse": "^5.3.2",
+    "path-browserify": "^1.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-csv": "^2.2.2",
+    "react-datepicker": "^4.8.0",
+    "react-dom": "^16.12.0",
+    "react-dropdown": "^1.10.0",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
+    "react-router-hash-link": "^2.4.3",
+    "redux": "^4.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4",
+    "smooth-scroll": "^16.1.3",
+    "socket.io-client": "^4.5.3",
+    "styled-components": "^5.3.0",
+    "universal-cookie": "^4.0.4",
+    "use-file-picker": "^1.5.2"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.7.2",
+    "@testing-library/react": "^12.1.2",
+    "prettier": "2.1.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
