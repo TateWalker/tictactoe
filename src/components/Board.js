@@ -1,39 +1,30 @@
 import "react-dropdown/style.css";
 import React from "react";
 import styled from "styled-components";
-import { useState, useContext } from "react";
 
 export default function Board(props) {
-  const { context } = props;
-  const { symbol } = context;
+  const { turn, playTurn, board } = props;
 
   const isEven = (n) => {
     return n % 2 == 0;
   };
 
-  const [matrix, setMatrix] = useState([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ]);
-
-  const updateMatrix = (column, row, symbol) => {
-    const newMatrix = [...matrix];
-    if (newMatrix[row][column] === null || newMatrix[row][column] === "null") {
-      newMatrix[row][column] = symbol;
-      setMatrix(newMatrix);
+  const showBlocker = () => {
+    if (turn != true) {
+      return <Blocker />;
     }
   };
 
   return (
     <BoardWrapper>
-      {matrix.map((row, rowId) => {
+      {showBlocker()}
+      {board.map((row, rowId) => {
         return (
           <RowWrapper>
             {row.map((column, columnId) => (
               <Cell
                 dark={!(isEven(rowId) && isEven(columnId))}
-                onClick={() => updateMatrix(columnId, rowId, symbol)}
+                onClick={() => playTurn(columnId, rowId)}
               >
                 {column && column !== "null" ? (
                   column === "x" ? (
@@ -56,6 +47,7 @@ export default function Board(props) {
 }
 
 const BoardWrapper = styled.div`
+  position: relative;
   display: grid;
   width: 100%;
   grid-template-rows: auto auto auto;
@@ -80,12 +72,13 @@ const Cell = styled.div`
 `;
 
 const Blocker = styled.div`
+  display: grid;
   width: 100%;
   height: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 99;
   cursor: default;
 `;
 

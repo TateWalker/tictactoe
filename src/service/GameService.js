@@ -22,7 +22,6 @@ class GameService {
 
   async onUserJoined(socket, listener) {
     socket.on("on_user_joined", ({ name }) => {
-      console.log(name);
       listener(name);
     });
   }
@@ -43,22 +42,11 @@ class GameService {
 
   async onGameStarted(socket, listener) {
     socket.on("game_started", ({ gameData }) => {
-      console.log(gameData);
       listener(gameData);
     });
   }
   async playTurn(socket, board) {
     socket.emit("play_turn", { board });
-  }
-
-  async onCategoryChanged(socket, listener) {
-    socket.on("category_changed", ({ icebreaker }) => {
-      listener(icebreaker);
-    });
-  }
-
-  async playTurn(socket, board, user) {
-    socket.emit("play_turn", { board, user });
   }
 
   async onTurnPlayed(socket, listener) {
@@ -67,23 +55,13 @@ class GameService {
     });
   }
 
-  async handleEndRound(socket, board) {
-    socket.emit("end_round", board);
+  async handleEndRound(socket, winner, board) {
+    socket.emit("end_round", { winner, board });
   }
 
   async onRoundEnded(socket, listener) {
-    socket.on("round_ended", (board) => {
-      listener(board);
-    });
-  }
-
-  async handleNewRound(socket, icebreaker) {
-    socket.emit("new_round", icebreaker);
-  }
-
-  async onNewRound(socket, listener) {
-    socket.on("new_round_started", (icebreaker) => {
-      listener(icebreaker);
+    socket.on("round_ended", ({ winner, board }) => {
+      listener(winner, board);
     });
   }
 
@@ -92,9 +70,8 @@ class GameService {
   }
 
   async onSessionEnded(socket, listener) {
-    const x = true;
-    socket.on("session_ended", (x) => {
-      listener(x);
+    socket.on("session_ended", () => {
+      listener();
     });
   }
 }

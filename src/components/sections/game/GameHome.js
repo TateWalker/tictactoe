@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import ReusableButton from "../../buttons/ReusableButton";
 import ReusableTextField from "../../textfield/ReusableTextField";
 import Board from "../../Board";
@@ -8,7 +8,6 @@ import UtilService from "../../../service/UtilService";
 import GameService from "../../../service/GameService";
 import StatusAlert from "../../alerts/StatusAlert";
 import { codeLength } from "../../../validators/validationUtilities";
-import Cookies from "universal-cookie";
 import { H1 } from "../../styles/TextStyles";
 
 export default function GameHome(props) {
@@ -21,12 +20,7 @@ export default function GameHome(props) {
   };
   const { context, changeStage, setIsHost, setCode, code } = props;
   const [alert, setAlert] = useState(emptyAlert);
-  const cookies = new Cookies();
   const { name, setName, symbol, setSymbol } = context;
-
-  if (!name) {
-    setName(cookies.get("name"));
-  }
 
   const connectToSocket = async () => {
     console.log("Connecting to socket...");
@@ -120,7 +114,14 @@ export default function GameHome(props) {
             <Title>Tic-Tac-Toe</Title>
           </TitleWrapper>
           <TopWrapper>
-            <Board context={context}></Board>
+            <Board
+              board={[
+                [null, null, null],
+                [null, null, null],
+                [null, null, null],
+              ]}
+              turn={false}
+            ></Board>
           </TopWrapper>
           <BottomWrapper>
             <TextFieldWrapper>
@@ -160,13 +161,6 @@ export default function GameHome(props) {
   return renderPage();
 }
 
-const animation = keyframes`
-  0% {opacity: 0;}
-  20% {opacity: 1;}
-  80% {opacity: 1;}
-  100% {opacity: 0;} 
-`;
-
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
@@ -192,33 +186,11 @@ const TopWrapper = styled.div`
   width: 500px;
   height: 300px;
   justify-items: center;
-  @media (max-width: 450px) {
-    vertical-align: middle;
-    margin: 0;
-    padding: 0 30px;
-    max-width: none;
-  }
-  .item {
-    opacity: 0.2;
-    transition-duration: 5s ease;
-  }
-  .item-active {
-    transition-duration: 3s;
-    transform: scale(1.08);
-    animation: ${animation} 7.5s forwards;
-  }
 `;
 
 const BottomWrapper = styled.div`
   margin: 0 auto;
   max-width: 750px;
-  @media (max-width: 450px) {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 `;
 
 const ButtonRowWrapper = styled.div`
@@ -229,7 +201,6 @@ const ButtonRowWrapper = styled.div`
 `;
 
 const TextFieldWrapper = styled.div`
-  /* border: 1px solid red; */
   padding: 0 20px;
   display: flex;
   flex-direction: column;

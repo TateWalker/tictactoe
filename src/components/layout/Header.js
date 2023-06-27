@@ -6,8 +6,8 @@ export default function Header() {
   return (
     <Wrapper>
       <LinkWrapper>
-        <Link to="/">
-          <img src="/images/logos/logo-black.svg" alt="Logo" />
+        <Link to="/index.html">
+          <img src="/images/logos/PersonalLogo.svg" alt="Logo" />
         </Link>
       </LinkWrapper>
     </Wrapper>

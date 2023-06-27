@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { BodyMain, H2, H3 } from "../../styles/TextStyles";
+import { BodyMain, H2 } from "../../styles/TextStyles";
 import ReusableButton from "../../buttons/ReusableButton";
 import StatusAlert from "../../alerts/StatusAlert";
 import DefaultSpinner from "../../spinners/DefaultSpinner";
@@ -10,10 +10,18 @@ import GameService from "../../../service/GameService";
 import TicTacToeService from "../../../service/TicTacToeService";
 import Board from "../../Board";
 export default function GameLobby(props) {
-  const { context, isHost, changeStage, code } = props;
+  const {
+    context,
+    isHost,
+    changeStage,
+    code,
+    opponent,
+    setOpponent,
+    gameStarted,
+    setGameStarted,
+  } = props;
   const { name, setName, symbol, setSymbol } = context;
 
-  const [opponent, setOpponent] = useState("");
   const emptyAlert = {
     visible: false,
     status: "",
@@ -133,10 +141,10 @@ export default function GameLobby(props) {
             turn: false,
           },
         };
-        console.log("here");
         let res = await TicTacToeService.createGame(gameData);
         if (res.status == 200) {
           GameService.startGame(socketService.socket, gameData);
+          setGameStarted(true);
           changeStage("GAME");
         } else {
           setAlert({
@@ -166,7 +174,13 @@ export default function GameLobby(props) {
         <TopWrapper>
           {userList()}
           <BoardWrapper>
-            <Board context={context}></Board>
+            <Board
+              board={[
+                [null, null, null],
+                [null, null, null],
+                [null, null, null],
+              ]}
+            ></Board>
           </BoardWrapper>
         </TopWrapper>
         {opponent == "" ? returnInstructions() : <EmptyWrapper></EmptyWrapper>}
@@ -175,13 +189,6 @@ export default function GameLobby(props) {
     </Wrapper>
   );
 }
-
-const animation = keyframes`
-  0% {opacity: 0;}
-  20% {opacity: 1;}
-  80% {opacity: 1;}
-  100% {opacity: 0;} 
-`;
 
 const Wrapper = styled.div`
   position: absolute;
@@ -204,9 +211,6 @@ const ContentWrapper = styled.div`
   align-content: center;
   grid-template-rows: 400px auto auto auto;
   gap: 20px;
-  @media (max-width: 450px) {
-    display: inline;
-  }
 `;
 
 const TopWrapper = styled.div`
@@ -214,12 +218,6 @@ const TopWrapper = styled.div`
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  @media (max-width: 450px) {
-    vertical-align: middle;
-    margin: 0;
-    padding: 0 30px;
-    max-width: none;
-  }
 `;
 
 const BoardWrapper = styled.div`
@@ -229,12 +227,6 @@ const BoardWrapper = styled.div`
   width: 500px;
   height: 300px;
   justify-items: center;
-  @media (max-width: 450px) {
-    vertical-align: middle;
-    margin: 0;
-    padding: 0 30px;
-    max-width: none;
-  }
 `;
 
 const ButtonWrapper = styled.div`

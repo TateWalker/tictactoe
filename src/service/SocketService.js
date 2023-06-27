@@ -4,7 +4,6 @@ class SocketService {
 
   connect() {
     return new Promise((resolve, reject) => {
-      console.log("In socket service");
       this.socket = io("localhost:6969");
       if (!this.socket) {
         console.log("No socket, rejecting");

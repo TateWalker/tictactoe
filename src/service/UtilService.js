@@ -1,5 +1,3 @@
-import { ColorData } from "../data/colorData";
-
 export class UtilService {
   getCode(length) {
     var result = "";
@@ -10,13 +8,6 @@ export class UtilService {
     }
     return result;
   }
-
-  getColor = () => {
-    //move to utils file
-    const colors = ColorData;
-    var randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex].color;
-  };
 }
 
 export default new UtilService();

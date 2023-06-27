@@ -27,13 +27,10 @@ export default class TicTacToeService {
 
   static async createGame(obj) {
     try {
-      console.log(obj);
       obj["board"] = this.getEmptyBoard();
-      console.log(obj);
       const res = await axios.post(this.hostUrl, obj, {
         headers: this.headers,
       });
-      console.log(res.data);
       return res.data;
     } catch (error) {
       if (error.response) {
@@ -44,14 +41,10 @@ export default class TicTacToeService {
     }
   }
 
-  static async getAllIcebreakers() {
+  static async getLeaderboard() {
     try {
-      const res = await axios.get(`${this.hostUrl}/all`, {
-        headers: {
-          ...this.headers,
-          access: this.cookies.get("access"),
-          refresh: this.cookies.get("refresh"),
-        },
+      const res = await axios.get(`${this.hostUrl}/leaderboard`, {
+        headers: this.headers,
       });
       return res.data;
     } catch (error) {
@@ -124,17 +117,12 @@ export default class TicTacToeService {
     }
   }
 
-  static async updateIcebreaker(icebreaker) {
+  static async finishGame(code, winner) {
     try {
       let url = `${this.hostUrl}`;
-      console.log("inside update icebreaker call");
-      console.log(icebreaker);
-      const res = await axios.put(url, icebreaker, {
-        headers: {
-          ...this.headers,
-          access: this.cookies.get("access"),
-          refresh: this.cookies.get("refresh"),
-        },
+      const data = { code: code, winner: winner };
+      const res = await axios.put(url, data, {
+        headers: this.headers,
       });
       return res.data;
     } catch (error) {
@@ -142,42 +130,13 @@ export default class TicTacToeService {
     }
   }
 
-  static async deleteIcebreaker(icebreaker) {
-    try {
-      let url = `${this.hostUrl}/delete`;
-      console.log("deleting icebreaker");
-      console.log(url);
-      const res = await axios.post(
-        url,
-        { id: icebreaker.id },
-        {
-          headers: {
-            ...this.headers,
-            access: this.cookies.get("access"),
-            refresh: this.cookies.get("refresh"),
-          },
-        }
-      );
-      return res.data;
-    } catch (error) {
-      return error.response.data;
-    }
-  }
-
-  static async createIcebreaker(icebreaker) {
+  static async updateGame(code, board, user, opponent) {
     try {
       let url = `${this.hostUrl}`;
-      console.log("creating icebreaker");
-      console.log(url);
-      const res = await axios.post(url, icebreaker, {
-        headers: {
-          ...this.headers,
-          access: this.cookies.get("access"),
-          refresh: this.cookies.get("refresh"),
-        },
+      const data = { code: code, board: board, user1: user, user2: opponent };
+      const res = await axios.put(url, data, {
+        headers: this.headers,
       });
-      console.log(res);
-      console.log(res.data);
       return res.data;
     } catch (error) {
       return error.response.data;

@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import Layout from "../components/layout/layout";
 import SEO from "../components/layout/seo";
 import GameHeader from "../components/layout/GameHeader";
-import GameHome from "../components/sections/icebreaker/GameHome";
-import GamePlay from "../components/sections/icebreaker/GamePlay";
-import GameLobby from "../components/sections/icebreaker/GameLobby";
-import GameResults from "../components/sections/icebreaker/GameResults";
+import GameHome from "../components/sections/game/GameHome";
+import GamePlay from "../components/sections/game/GamePlay";
+import GameLobby from "../components/sections/game/GameLobby";
+import GameResults from "../components/sections/game/GameResults";
 import { UserContext } from "../providers/userContext";
-import { GameContext } from "../providers/gameContext";
 
 function IndexPage() {
   const [isHost, setIsHost] = useState(false);
   const [stage, setStage] = useState("HOME");
-  const [isInRoom, setIsInRoom] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [playerName, setPlayerName] = useState("");
   const [code, setCode] = useState("");
-  const [allAnswers, setAllAnswers] = useState([]);
+  const [opponent, setOpponent] = useState("");
+  const [results, setResults] = useState();
+  const [finalBoard, setFinalBoard] = useState();
 
   const onStageChange = (newStage) => {
     setStage(newStage);
@@ -40,6 +39,10 @@ function IndexPage() {
             isHost={isHost}
             changeStage={(e) => onStageChange(e)}
             code={code}
+            opponent={opponent}
+            setOpponent={(e) => setOpponent(e)}
+            gameStarted={isGameStarted}
+            setGameStarted={(e) => setIsGameStarted(e)}
           />
         );
       case "GAME":
@@ -48,17 +51,26 @@ function IndexPage() {
             context={context}
             isHost={isHost}
             code={code}
-            setCode={setCode}
+            setCode={(e) => setCode(e)}
             changeStage={(e) => onStageChange(e)}
+            opponent={opponent}
+            setOpponent={(e) => setOpponent(e)}
+            gameStarted={isGameStarted}
+            setResults={(e) => setResults(e)}
+            setFinalBoard={(e) => setFinalBoard(e)}
           />
         );
       case "RESULTS":
         return (
           <GameResults
-            isHost={isHost}
             changeStage={(e) => onStageChange(e)}
-            code={code}
-            setCode={setCode}
+            setCode={(e) => setCode(e)}
+            results={results}
+            setResults={(e) => setResults(e)}
+            finalBoard={finalBoard}
+            setFinalBoard={(e) => setFinalBoard(e)}
+            context={context}
+            setOpponent={(e) => setOpponent(e)}
           />
         );
       default:
@@ -70,7 +82,7 @@ function IndexPage() {
     <UserContext.Consumer>
       {(context) => (
         <Layout>
-          <SEO title="icebreaker" />
+          <SEO title="tic-tac-toe" />
           <GameHeader />
           {getComponent(context)}
         </Layout>

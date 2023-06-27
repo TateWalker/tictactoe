@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import MenuButton from "../buttons/MenuButton";
-import { H2 } from "../styles/TextStyles";
-import { gamePortalData } from "../../data/gamePortalData";
-import Cookies from "universal-cookie";
 
 export default function Header() {
   return (
     <Wrapper>
       <LinkWrapper>
-        <Link to={"/index"}>
+        <Link to={"/index.html"}>
           <img src="/images/logos/personalLogo.svg" alt="Logo" />
         </Link>
       </LinkWrapper>
