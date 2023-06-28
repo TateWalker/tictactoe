@@ -8,7 +8,7 @@ import socketService from "../../../service/SocketService";
 import GameService from "../../../service/GameService";
 import Board from "../../Board";
 import TicTacToeService from "../../../service/TicTacToeService";
-export default function IcebreakerResults(props) {
+export default function GameResults(props) {
   const {
     changeStage,
     setCode,
