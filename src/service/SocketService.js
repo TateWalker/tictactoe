@@ -4,7 +4,7 @@ class SocketService {
 
   connect() {
     return new Promise((resolve, reject) => {
-      this.socket = io("localhost:6969");
+      this.socket = io("localhost:4242");
       if (!this.socket) {
         console.log("No socket, rejecting");
         return reject();
