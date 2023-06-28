@@ -16,9 +16,6 @@ export default function Header() {
 
 const LinkWrapper = styled.div`
   width: 150px;
-  @media (max-width: 450px) {
-    width: 44px;
-  }
   img {
     height: 100px;
     width: 100px;
@@ -31,13 +28,4 @@ const Wrapper = styled.div`
   display: grid;
   width: 100%;
   padding: 0 30px;
-
-  @media (max-width: 768px) {
-    top: 30px;
-  }
-  @media (max-width: 450px) {
-    top: 20px;
-    padding: 0 20px;
-    grid-template-columns: 100px auto;
-  }
 `;

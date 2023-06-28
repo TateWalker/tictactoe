@@ -173,10 +173,7 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   width: 750px;
   justify-content: center;
-  grid-template-rows: 80% 20%;
-  @media (max-width: 450px) {
-    display: inline;
-  }
+  grid-template-rows: auto auto;
 `;
 
 const TopWrapper = styled.div`

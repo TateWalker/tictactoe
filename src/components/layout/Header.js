@@ -16,9 +16,6 @@ export default function Header() {
 
 const LinkWrapper = styled.div`
   width: 75px;
-  @media (max-width: 450px) {
-    width: 44px;
-  }
   img {
     height: 100px;
     width: 100px;
@@ -34,12 +31,4 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 0 30px;
   align-items: center;
-
-  @media (max-width: 768px) {
-    top: 30px;
-  }
-  @media (max-width: 450px) {
-    top: 20px;
-    padding: 0 20px;
-  }
 `;

@@ -91,9 +91,6 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   height: 100%;
   grid-template-columns: 40% 60%;
-  @media (max-width: 450px) {
-    display: inline;
-  }
 `;
 
 const GraphicWrapper = styled.div`
@@ -102,9 +99,6 @@ const GraphicWrapper = styled.div`
   width: 100%;
   justify-items: center;
   align-content: center;
-  @media (max-width: 450px) {
-    display: hidden;
-  }
 `;
 
 const Graphic = styled.img`
